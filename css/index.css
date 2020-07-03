@@ -49,6 +49,7 @@ h6 {
 
 form {
   width: 60%;
+  height: 85%;
   margin: auto;
   padding: 2rem 1rem;
   border: 2px solid #24adad;
@@ -67,6 +68,9 @@ form::before {
 
 #task-header {
   margin: 1rem 0; }
+
+#cart {
+  height: 80%; }
 
 label {
   display: block;
@@ -96,15 +100,15 @@ h3 {
 .tasks {
   list-style: none;
   border: 1px solid #d4d3d3;
-  border-radius: 3px;
-  max-height: 16.8rem; }
+  border-radius: 3px; }
 
 .task-items {
   padding: 0.8rem 1rem;
   border: none;
   border-bottom: 1px solid #d4d3d3;
   display: flex;
-  justify-content: space-between; }
+  justify-content: space-between;
+  transition: all 0.5s ease; }
 
 .task-items:last-child {
   border-bottom: none; }
@@ -113,3 +117,23 @@ h3 {
   font-size: 0.8rem;
   color: #ccbc2d;
   cursor: pointer; }
+
+@media only screen and (max-width: 1024px) {
+  form {
+    width: 80%;
+    height: 95%; } }
+
+@media only screen and (max-width: 500px) {
+  form {
+    width: 95%; }
+  .btn {
+    width: 40%; } }
+
+@media only screen and (max-width: 360px) {
+  #allign {
+    height: 110vh; }
+  form {
+    width: 100%;
+    height: 100%; }
+  .btn {
+    width: 45%; } }

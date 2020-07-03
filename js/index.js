@@ -1,5 +1,3 @@
-
-
 console.log(document.getElementById("task-header"));
 
 let boxContent = document.getElementById("task-box");
@@ -28,58 +26,11 @@ label.style.color = "#fff";
 
 // creating new list item
 
-function createList(type, className, content, price) {
-  //   const newList = document.createElement("li");
-  const newList = document.createElement(type);
-
-  //   newList.className = "task-items";
-  newList.className = className;
-
-  newList.appendChild(document.createTextNode(content));
-
-  const i = document.createElement("span");
-  i.innerHTML = `<i class="fas fa-times"></i>`;
-
-  const span1 = document.createElement("span");
-  span1.className = "money-section";
-
-  const span2 = document.createElement("span");
-  span2.className = "money";
-  span2.appendChild(document.createTextNode("Gh¢ "));
-
-  const span3 = document.createElement("span");
-  span3.className = "amount";
-  span3.appendChild(document.createTextNode(price));
-
-  span1.appendChild(span2);
-
-  span2.appendChild(span3);
-  span1.appendChild(i);
-
-  newList.appendChild(span1);
-
-  return newList;
-}
-
-const tasks = document.querySelector("ul.tasks");
-//Appending newList to main UL (tasks)
-tasks.appendChild(createList("li", "task-items", "Vanilla Essence", "2.00 "));
-
-tasks.appendChild(createList("li", "task-items", "Whip Cream", "20.00 "));
-
-tasks.appendChild(createList("li", "task-items", "Flour", "50.00 "));
-
-//Setting Vertical SCROLL If number Of Items In Cart Surpasses 6
-if (document.querySelector("ul.tasks").children.length > 6) {
-  document.querySelector("ul.tasks").style.overflowY = "scroll";
-  // document.querySelector("ul.tasks").style.scrollbar.display = "none";
-}
-
-let money = document.getElementsByClassName("amount");
-
-money = Array.from(money);
-
 function calculateCost() {
+  let money = document.getElementsByClassName("amount");
+
+  money = Array.from(money);
+
   var total = 0;
   let sum = 0;
   money.forEach(function (element) {
@@ -87,6 +38,40 @@ function calculateCost() {
     total += sum;
   });
   console.log(total);
-  return total;
 }
-boxContent.textContent = "Gh¢ " + calculateCost();
+
+// **************************************************************************************************************************************************************************************
+
+let xIcons = document.getElementsByClassName("fas");
+
+for (i = 0; i < xIcons.length; i++) {
+  let parent = xIcons[i].parentElement.parentElement;
+
+  xIcons[i].addEventListener("click", () => {
+    parent.remove();
+    boxContent.textContent = "Gh¢ " + calculateCost();
+    if (cartCont.childElementCount === 0) {
+      cartCont.innerHTML = "No item in cart";
+      cartCont.style.height = "10rem";
+    }
+
+    console.log(cartCont.childElementCount);
+  });
+}
+let cartCont = document.getElementById("orders");
+
+let clear = document.getElementById("Clear");
+
+clear.addEventListener("click", () => {
+  let order = document.getElementById("orders");
+
+  let text = document.createElement("ul");
+  text.innerHTML = "No item in cart";
+  text.style.width = "100%";
+  text.style.height = "10rem";
+  text.style.border = "1px solid #fff";
+  text.style.borderRadius = "4px";
+
+  order.replaceWith(text);
+  boxContent.textContent = "Gh¢ " + calculateCost();
+});
